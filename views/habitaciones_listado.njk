@@ -1,0 +1,65 @@
+{% extends 'base.njk' %}
+{% block titulo %}
+  Listado de Habitaciones
+{% endblock titulo %}
+{% block contenido %}
+  <style>
+    .habitacion-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid #007BFF; 
+      border-radius: 8px; 
+      background-color: #ffffff; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+      transition: transform 0.2s; 
+    }
+
+    .habitacion-box:hover {
+      transform: translateY(-5px);
+    }
+
+    .container {
+      max-width: 1200px;
+    }
+
+    h1 {
+      font-weight: 300; 
+      color: #333; 
+    }
+
+    a.btn {
+      font-size: 0.9rem; 
+    }
+  </style>
+
+  <div class="container mt-4">
+    <h1 class="mb-4">Listado de Habitaciones</h1>
+    <div class="row">
+      {% for habitacion in habitaciones %}
+        <div class="col-md-4 mb-4">
+          <div class="habitacion-box">
+            <div>
+              <h5 class="mb-2">Habitación {{ habitacion.numero }}</h5> 
+              {% if habitacion.ultimaLimpieza %}
+                <p class="mb-1">
+                  <strong>Última Limpieza:</strong>
+                  {{ habitacion.ultimaLimpieza | date ('DD/MM/YYYY') }}</p>
+              {% else %}
+                <p class="mb-1">
+                  <strong>Última Limpieza:</strong>
+                  No registrada</p>
+              {% endif %}
+            </div>
+            <div>
+              <a href="/habitaciones/{{ habitacion.id }}" class="btn btn-outline-success">Ver Ficha</a><br><br>
+               <a href="/habitaciones/editar/{{ habitacion.id }}" class="btn btn-outline-warning" >Editar</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

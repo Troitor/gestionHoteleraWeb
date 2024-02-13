@@ -1,0 +1,25 @@
+{% extends "base.njk" %}
+{% block titulo %}
+  Limpiezas
+{% endblock titulo %}
+{% block contenido %}
+  <div class="container">
+    <h1>Limpieza de la habitación {{ limpiezas[0].idHabitacion.numero }}</h1>
+    <ul class="list-group list-group-flush">
+      {% for limpieza in limpiezas %}
+        <li class="list-group-item">
+          <strong>Fecha:</strong>
+          {{ limpieza.fechaHora | date("DD/MM/YYYY") }}
+          {% if limpieza.observaciones %}
+            <br>
+            <strong>Observaciones:</strong>
+            {{ limpieza.observaciones }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+     {% if session and session.usuario %}
+    <a href="/limpiezas/nueva/{{ limpiezas[0].idHabitacion }}" class="btn btn-outline-warning">Nueva limpieza</a>
+      {% endif %}
+  </div>
+{% endblock %}

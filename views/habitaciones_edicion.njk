@@ -1,0 +1,71 @@
+{% extends "base.njk" %}
+<!--hereda de la plantilla base-->
+{% block titulo %}Habitaciones | Editar{% endblock %}
+{% block contenido %}
+    <h1>Editar habitación existente</h1>
+    {% if (habitacion) %}
+        {% if errores.general %}
+            <p class="text-danger">{{ errores.general }}</p>
+        {% endif %}
+        <form action="/habitaciones" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Número de la habitación:
+                    <input type="number" class="form-control" name="numero" placeholder="número de la habitación..."></label>
+                    {% if errores.numero %}
+                        <p class="text-danger">{{ errores.numero }}</p>
+                    {% endif %}
+                </div>
+                <br>
+                    <div
+                        class="form-group">
+                        <!--deplegable con las opciones del esquema-->
+                        <label>Tipo de habitación:
+                            <select class="form-control" name="tipo">
+                                <option value="individual">Individual</option>
+                                <option value="doble">Doble</option>
+                                <option value="familiar">Familiar</option>
+                                <option value="suite">Suite</option>
+                            </select>
+                        </label>
+                        {% if errores.tipo %}
+                            <p class="text-danger">{{ errores.tipo }}</p>
+                        {% endif %}
+                    </div>
+                    <br>
+                        <div
+                            class="form-group">
+                            <!--descripción con texto largo-->
+                            <label>Descripción:
+                                <textarea class="form-control" name="descripcion" placeholder="Descripción..."></textarea>
+                            </label>
+                            {% if errores.descripcion %}
+                                <p class="text-danger">{{ errores.descripcion }}</p>
+                            {% endif %}
+                        </div>
+                        <br>
+                            <div class="form-group">
+                                <label>Precio por noche:
+                                    <input type="number" class="form-control" name="precio" placeholder="precio..."></label>
+                                    {% if errores.precio %}
+                                        <p class="text-danger">{{ errores.precio }}</p>
+                                    {% endif %}
+                                </div>
+                                <br>
+                                    <div class="form-group">
+                                        <label>Imagen:
+                                            <input type="file" class="form-control" name="imagen" placeholder="sube una imagen..."></label>
+                                            {% if (habitacion.imagen) %}
+                                                <!--este dato es opcional por eso lo metemos en un if-->
+                                                <p>
+                                                    <img width="400px" src="/uploads/habitaciones/{{ habitacion.imagen }}" alt="Imagen habitación"></p>
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                                <button type="submit" class="btn btn-outline-primary">
+                                                    Enviar
+                                                </button>
+                                            </form>
+                                        {% else %}
+                                            <div class="alert alert-danger">Habitación no especificada</div>
+                                        {% endif %}
+                                    {% endblock %}

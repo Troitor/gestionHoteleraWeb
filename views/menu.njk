@@ -1,0 +1,10 @@
+<div class="container mt-4 bg-light">
+    <a href="/habitaciones" class="btn btn-outline-dark">Habitaciones</a>
+    &nbsp;&nbsp;
+    {% if session and session.usuario %}
+        <a href="/habitaciones/nueva" class="btn btn-outline-dark">Nueva habitación</a>
+        <a class="btn btn-outline-dark" href="/logout">Logout</a>
+    {% else %}
+        <a class="btn btn-outline-dark" href="/login">Login</a>
+    {% endif %}
+</div>
